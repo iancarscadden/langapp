@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import json
-import openai
+from openai import OpenAI
 from dotenv import load_dotenv
 
 # Load environment variables from .env
@@ -14,7 +14,7 @@ GENIUS_API_TOKEN = os.environ.get("GENIUS_API_TOKEN")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 # Initialize the OpenAI API key
-openai.api_key = OPENAI_API_KEY
+client = OpenAI(OPENAI_API_KEY)
 
 
 # Load songs data from JSON and organize by language
@@ -99,14 +99,14 @@ def explain():
 # Function to get explanation from OpenAI API
 def get_explanation(text):
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-4o-mini",  # Ensure you have access to GPT-4
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are helping people learn languages through music."},
                 {"role": "user",
                  "content": f"Explain how the following phrase is used in normal conversations, keep it short:\n\n'{text}'"}
             ],
-            max_tokens=100,
+            max_tokens=150,
             temperature=0.7,
         )
         explanation = response['choices'][0]['message']['content'].strip()
