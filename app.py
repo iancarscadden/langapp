@@ -99,17 +99,20 @@ def explain():
 # Function to get explanation from OpenAI API
 def get_explanation(text):
     try:
-        completion = client.chat.completions.create(
+        response = client.chat.completions.create(
             model="gpt-4o-mini",  # Ensure you have access to GPT-4
             messages=[
-                {"role": "system", "content": "You are helping people learn languages through music"},
-                {"role": "user", "content": f"Explain how the following phrase is used in normal conversations (limit to 150 tokens):\n\n'{text}'"}
+                {"role": "system", "content": "You are helping people learn languages through music."},
+                {"role": "user",
+                 "content": f"Explain how the following phrase is used in normal conversations:\n\n'{text}'"}
             ],
             max_tokens=150,
             temperature=0.7,
         )
-        explanation = completion.choices[0].message['content'].strip()
-        return explanation
+
+        # Access the completion message properly
+        explanation = response['choices'][0]['message']['content']  # Make sure you're using the correct format
+        return explanation.strip()
     except Exception as e:
         print(f"Error calling OpenAI API: {e}")
         return "An error occurred while fetching the explanation."
