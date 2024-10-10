@@ -14,7 +14,7 @@ GENIUS_API_TOKEN = os.environ.get("GENIUS_API_TOKEN")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 # Initialize the OpenAI API key
-client = OpenAI(OPENAI_API_KEY)
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 # Load songs data from JSON and organize by language
@@ -99,17 +99,16 @@ def explain():
 # Function to get explanation from OpenAI API
 def get_explanation(text):
     try:
-        response = client.chat.completions.create(
+        completion = client.chat.completions.create(
             model="gpt-4o-mini",  # Ensure you have access to GPT-4
             messages=[
-                {"role": "system", "content": "You are helping people learn languages through music."},
-                {"role": "user",
-                 "content": f"Explain how the following phrase is used in normal conversations, keep it short:\n\n'{text}'"}
+                {"role": "system", "content": "You are helping people learn languages through music"},
+                {"role": "user", "content": f"Explain how the following phrase is used in normal conversations (limit to 150 tokens):\n\n'{text}'"}
             ],
             max_tokens=150,
             temperature=0.7,
         )
-        explanation = response['choices'][0]['message']['content'].strip()
+        explanation = completion.choices[0].message['content'].strip()
         return explanation
     except Exception as e:
         print(f"Error calling OpenAI API: {e}")
