@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Choose Song - Lyric Language Learner{% endblock %}
+{% block content %}
+<div class="text-center">
+    <h2 class="text-3xl font-semibold mb-6 animate-fade-in">Choose a Song ({{ language }})</h2>
+    {% if error %}
+        <div class="bg-red-500 text-white p-4 rounded mb-4">
+            {{ error }}
+        </div>
+    {% endif %}
+    <div class="flex flex-col items-center space-y-4 animate-slide-in-up">
+        {% for song in songs %}
+            <form method="post" class="w-full max-w-md">
+                <input type="hidden" name="song_id" value="{{ song.id }}">
+                <button type="submit" class="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-white font-semibold transition duration-300 transform hover:scale-105">
+                    {{ song.song }} - {{ song.artist }}
+                </button>
+            </form>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!-- templates/index.html -->
+
+{% extends "layout.html" %}
+{% block title %}Home - Lyric Language Learner{% endblock %}
+{% block content %}
+<div class="text-center">
+    <h1 class="text-4xl font-bold mb-6 animate-fade-in">Learn Languages Through Music</h1>
+    {% if error %}
+        <div class="bg-red-500 text-white p-4 rounded mb-4">
+            {{ error }}
+        </div>
+    {% endif %}
+    <form method="post" class="max-w-md mx-auto bg-gray-800 p-6 rounded shadow-md animate-slide-in-up">
+        <div class="mb-4">
+            <label for="artist" class="block text-left mb-2">Artist Name</label>
+            <input type="text" name="artist" id="artist" class="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter artist name" required>
+        </div>
+        <div class="mb-6">
+            <label for="song" class="block text-left mb-2">Song Title</label>
+            <input type="text" name="song" id="song" class="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter song title" required>
+        </div>
+        <button type="submit" class="w-full py-2 bg-indigo-500 hover:bg-indigo-600 rounded text-white font-semibold transition duration-300 transform hover:scale-105">
+            Get Lyrics
+        </button>
+    </form>
+</div>
+{% endblock %}

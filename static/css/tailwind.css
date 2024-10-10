@@ -1,0 +1,31 @@
+  /* static/css/tailwind.css */
+
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  /* Custom Styles */
+
+  body {
+    /* Add a subtle background gradient */
+    background: linear-gradient(135deg, #1f2937 0%, #4b5563 100%);
+  }
+
+  #lyrics {
+    /* Add a scrollbar style */
+    scrollbar-width: thin;
+    scrollbar-color: #6b7280 #374151;
+  }
+
+  #lyrics::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  #lyrics::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
+  #lyrics::-webkit-scrollbar-thumb {
+    background-color: #6b7280;
+    border-radius: 4px;
+  }

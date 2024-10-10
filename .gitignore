@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+
+# Environment Variables
+.env
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+
+# MacOS
+.DS_Store
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
