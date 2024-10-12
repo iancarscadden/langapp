@@ -3,30 +3,31 @@
 {% block content %}
 <div class="flex flex-col items-center justify-center space-y-6">
     <!-- YouTube Video Embed Section -->
-    <div class="w-full lg:w-3/4">
+    <div class="w-full lg:w-4/5 flex justify-center">
         {% if youtube_id %}
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/{{ youtube_id }}"
-                    title="{{ song }}" class="border-0"
+            <iframe width="560" height="315"
+                    src="https://www.youtube.com/embed/{{ youtube_id }}"
+                    title="{{ song }}"
+                    class="border-0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-            </iframe>
+                    allowfullscreen></iframe>
         {% else %}
             <p>No video available for this song.</p>
         {% endif %}
     </div>
 
     <!-- Lyrics and Translation Section -->
-    <div class="w-full lg:w-3/4 flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6">
-        <!-- Lyrics Section -->
-        <div class="w-full lg:w-1/2 bg-gray-800 p-6 rounded shadow-md animate-slide-in-up">
-            <h2 class="text-2xl font-semibold mb-4">{{ song }} - {{ artist }} ({{ language }})</h2>
-            <pre id="lyrics" class="whitespace-pre-wrap text-gray-200">{{ lyrics }}</pre>
-        </div>
-
-        <!-- English Lyrics Section -->
+    <div class="w-full lg:w-4/5 flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6">
+        <!-- English Lyrics Section (Left Side) -->
         <div class="w-full lg:w-1/2 bg-gray-800 p-6 rounded shadow-md animate-slide-in-up">
             <h2 class="text-2xl font-semibold mb-4">English Translation</h2>
             <pre id="lyrics-english" class="whitespace-pre-wrap text-gray-200">{{ lyrics_english }}</pre>
+        </div>
+
+        <!-- Foreign Lyrics Section (Right Side) -->
+        <div class="w-full lg:w-1/2 bg-gray-800 p-6 rounded shadow-md animate-slide-in-up">
+            <h2 class="text-2xl font-semibold mb-4">{{ song }} - {{ artist }} ({{ language }})</h2>
+            <pre id="lyrics" class="whitespace-pre-wrap text-gray-200">{{ lyrics }}</pre>
         </div>
     </div>
 </div>
