@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Lyric Language Learner{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Tailwind CSS -->
+    <!-- Link to Tailwind and Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    {% block head %}{% endblock %}
 </head>
 <body class="bg-gray-900 text-white font-poppins">
     <!-- Navigation Bar -->
@@ -20,10 +17,13 @@
         </div>
     </nav>
 
+    <!-- Main Content Section -->
     <div class="container mx-auto py-8">
         {% block content %}{% endblock %}
     </div>
 
+    <!-- Scripts Section -->
     {% block scripts %}{% endblock %}
 </body>
 </html>
+

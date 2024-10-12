@@ -2,17 +2,32 @@
 {% block title %}Choose Language - Lyric Language Learner{% endblock %}
 {% block content %}
 <div class="text-center">
-    <h2 class="text-3xl font-semibold mb-6 animate-fade-in">Choose Your Language</h2>
+    <h2 class="text-4xl font-bold mb-28 animate-fade-in">Choose Your Language</h2> <!-- Increased margin-bottom to mb-28 for more spacing -->
     {% if error %}
         <div class="bg-red-500 text-white p-4 rounded mb-4">
             {{ error }}
         </div>
     {% endif %}
-    <div class="flex flex-col items-center space-y-4 animate-slide-in-up">
+    <div class="flex flex-col items-center space-y-6 mt-10 animate-slide-in-up"> <!-- Added margin-top mt-10 -->
         {% for language in languages %}
-            <form method="post" class="w-full max-w-md">
-                <button type="submit" name="language" value="{{ language }}" class="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-white font-semibold transition duration-300 transform hover:scale-105">
-                    {{ language }}
+            <form method="post" class="w-full max-w-lg">
+                <button type="submit" name="language" value="{{ language }}" class="w-full px-8 py-6 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-semibold text-2xl flex justify-between items-center transition duration-300 transform hover:scale-105">
+                    <div class="flex items-center">
+                        {% if language.lower() == 'spanish' %}
+                            <span class="text-5xl mr-6">🇪🇸</span> <!-- Larger flag emoji and spacing -->
+                            <span>Español</span> <!-- Native name -->
+                        {% elif language.lower() == 'french' %}
+                            <span class="text-5xl mr-6">🇫🇷</span>
+                            <span>Français</span> <!-- Native name -->
+                        {% elif language.lower() == 'arabic' %}
+                            <span class="text-5xl mr-6">🇸🇦</span>
+                            <span>العربية</span> <!-- Arabic script for "Arabic" -->
+                        {% elif language.lower() == 'english' %}
+                            <span class="text-5xl mr-6">🇺🇸</span>
+                            <span>English</span> <!-- English already native name -->
+                        {% endif %}
+                    </div>
+                    <span class="text-3xl text-gray-400">›</span> <!-- Right-pointing chevron for UI navigation -->
                 </button>
             </form>
         {% endfor %}

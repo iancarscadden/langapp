@@ -24,14 +24,16 @@ def load_songs():
     # Organize songs by language
     songs_by_language = {}
     for song in songs_list:
-        language = song['language'].lower()  # Normalize language to lowercase
+        language = song['language'].lower()
         if language not in songs_by_language:
             songs_by_language[language] = []
         songs_by_language[language].append({
             'id': song['id'],
             'artist': song['artist'],
             'song': song['song'],
-            'lyrics': song['lyrics']
+            'lyrics': song['lyrics'],
+            'lyrics_english': song.get('lyrics_english', ''),
+            'youtube_id': song.get('youtube_id', '')  # Include YouTube ID
         })
     return songs_by_language
 
@@ -73,16 +75,21 @@ def choose_song(language):
         # Find the song by ID
         selected_song = next((song for song in songs_data[language] if song['id'] == selected_song_id), None)
         if selected_song:
-            return render_template('lyrics.html', language=language.capitalize(), song=selected_song['song'],
-                                   lyrics=selected_song['lyrics'], artist=selected_song['artist'])
+            return render_template('lyrics.html',
+                                   language=language.capitalize(),
+                                   song=selected_song['song'],
+                                   lyrics=selected_song['lyrics'],
+                                   lyrics_english=selected_song.get('lyrics_english', ''),
+                                   artist=selected_song['artist'],
+                                   youtube_id=selected_song.get('youtube_id', ''))  # Pass YouTube ID
         else:
             error = "Selected song not found."
-            song_titles = [song['song'] for song in songs_data[language]]
-            return render_template('choose_song.html', language=language.capitalize(), songs=songs_data[language],
-                                   error=error)
+            return render_template('choose_song.html', language=language.capitalize(), songs=songs_data[language], error=error)
 
-    # Pass the list of song dictionaries to the template
     return render_template('choose_song.html', language=language.capitalize(), songs=songs_data[language])
+
+
+
 
 
 # Route to handle OpenAI API call (Explanation Feature)
